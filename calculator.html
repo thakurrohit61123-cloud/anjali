@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Scientific Calculator | Anjali</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #0f172a, #020617);
+        }
+
+        /* Glass Card */
+        .calculator {
+            width: 380px;
+            padding: 25px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .display {
+            width: 100%;
+            height: 80px;
+            background: #000;
+            color: #00f5d4;
+            font-size: 28px;
+            text-align: right;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            box-shadow: inset 0 0 15px #00f5d4;
+        }
+
+        /* Grid Buttons */
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+        }
+
+        button {
+            padding: 18px;
+            font-size: 16px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            background: #1e293b;
+            color: white;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #00f5d4;
+            color: black;
+            transform: scale(1.08);
+            box-shadow: 0 0 15px #00f5d4;
+        }
+
+        .operator {
+            background: #06b6d4;
+            color: black;
+            font-weight: bold;
+        }
+
+        .equal {
+            grid-column: span 2;
+            background: #00f5d4;
+            color: black;
+            font-weight: bold;
+        }
+
+        .clear {
+            background: #ef4444;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="calculator">
+        <div class="display" id="display">0</div>
+
+        <div class="buttons">
+            <button onclick="clearDisplay()" class="clear">C</button>
+            <button onclick="appendValue('Math.sqrt(')">√</button>
+            <button onclick="appendValue('**2')">x²</button>
+            <button onclick="appendValue('%')">%</button>
+            <button onclick="appendValue('/')">÷</button>
+
+            <button onclick="appendValue('Math.sin(')">sin</button>
+            <button onclick="appendValue('Math.cos(')">cos</button>
+            <button onclick="appendValue('Math.tan(')">tan</button>
+            <button onclick="appendValue('Math.log10(')">log</button>
+            <button onclick="appendValue('*')">×</button>
+
+            <button onclick="appendValue('7')">7</button>
+            <button onclick="appendValue('8')">8</button>
+            <button onclick="appendValue('9')">9</button>
+            <button onclick="appendValue('-')">−</button>
+            <button onclick="appendValue('(')">(</button>
+
+            <button onclick="appendValue('4')">4</button>
+            <button onclick="appendValue('5')">5</button>
+            <button onclick="appendValue('6')">6</button>
+            <button onclick="appendValue('+')">+</button>
+            <button onclick="appendValue(')')">)</button>
+
+            <button onclick="appendValue('1')">1</button>
+            <button onclick="appendValue('2')">2</button>
+            <button onclick="appendValue('3')">3</button>
+            <button onclick="appendValue('.')">.</button>
+            <button onclick="deleteLast()">DEL</button>
+
+            <button onclick="appendValue('0')">0</button>
+            <button onclick="calculate()" class="equal">=</button>
+        </div>
+    </div>
+
+    <script>
+        let display = document.getElementById("display");
+
+        function appendValue(value) {
+            if (display.innerText === "0") {
+                display.innerText = value;
+            } else {
+                display.innerText += value;
+            }
+        }
+
+        function clearDisplay() {
+            display.innerText = "0";
+        }
+
+        function deleteLast() {
+            display.innerText = display.innerText.slice(0, -1);
+            if (display.innerText === "") {
+                display.innerText = "0";
+            }
+        }
+
+        function calculate() {
+            try {
+                display.innerText = eval(display.innerText);
+            } catch {
+                display.innerText = "Error";
+            }
+        }
+
+        /* Keyboard Support */
+        document.addEventListener("keydown", function (e) {
+            if (!isNaN(e.key) || "+-*/().".includes(e.key)) {
+                appendValue(e.key);
+            }
+            if (e.key === "Enter") {
+                calculate();
+            }
+            if (e.key === "Backspace") {
+                deleteLast();
+            }
+        });
+    </script>
+
+</body>
+
+</html>
