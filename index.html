@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anjali | AI Portfolio</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Animated AI Background */
+        body::before {
+            content: "";
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, rgba(0, 255, 255, 0.2) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveBg 10s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes moveBg {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(50px);
+            }
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 10%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+        }
+
+        nav h2 {
+            color: #00f2fe;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #00f2fe;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        .hero img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 4px solid #00f2fe;
+            margin-bottom: 20px;
+            box-shadow: 0 0 25px #00f2fe;
+        }
+
+        .hero h1 {
+            font-size: 40px;
+        }
+
+        .hero span {
+            color: #00f2fe;
+        }
+
+        .hero p {
+            margin: 15px 0;
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .btn {
+            padding: 10px 25px;
+            background: #00f2fe;
+            color: black;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        /* Section */
+        section {
+            padding: 80px 10%;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 40px;
+            font-size: 30px;
+            color: #00f2fe;
+        }
+
+        /* Skills */
+        .skills div {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 25px;
+            margin: 10px;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+
+        .skills div:hover {
+            background: #00f2fe;
+            color: black;
+            transform: translateY(-10px);
+        }
+
+        /* Projects */
+        .project-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            margin: 20px;
+            border-radius: 15px;
+            display: inline-block;
+            width: 280px;
+            transition: 0.3s;
+        }
+
+        .project-card:hover {
+            transform: scale(1.05);
+            background: #00f2fe;
+            color: black;
+        }
+
+        /* Footer */
+        footer {
+            padding: 20px;
+            background: black;
+            text-align: center;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <h2>Anjali</h2>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero">
+        <div>
+            <img src="your-image.jpg" alt="Anjali">
+            <h1>Hello, I'm <span>Anjali</span></h1>
+            <p>BCA Student at KL Mehta Dayanand Women College, Faridabad</p>
+            <p>Strong Interest in Artificial Intelligence, Web Designing & Problem Solving</p>
+            <a href="resume.pdf" class="btn" download>Download Resume</a>
+        </div>
+    </div>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p>
+            I am Anjali, a passionate BCA student at KL Mehta Dayanand Women College, Faridabad.
+            I am deeply interested in Artificial Intelligence and modern web technologies.
+            I love creating intelligent systems and creative websites that solve real-world problems.
+            My goal is to become a successful AI Engineer and contribute to the digital world.
+        </p>
+    </section>
+
+    <section id="skills">
+        <h2>My Skills</h2>
+        <div class="skills">
+            <div>HTML</div>
+            <div>CSS</div>
+            <div>Java</div>
+            <div>Problem Solving</div>
+            <div>Web Design</div>
+            <div>Artificial Intelligence (Learning)</div>
+        </div>
+    </section>
+    <section id="projects">
+        <h2>My Projects</h2>
+        <div class="project-card">
+            <h3>Advanced Scientific Calculator</h3>
+            <p>
+                Advanced AI-inspired scientific calculator built using HTML, CSS and JavaScript.
+                Includes trigonometric functions, keyboard support and dynamic DOM manipulation.
+            </p>
+
+            <a href="calculator.html" target="_blank" class="project-btn">
+                Live Demo
+            </a>
+        </div>
+
+        <div class="project-card">
+            <h3>Resume Analyzer</h3>
+            <p>An AI-based resume analyzing system that checks resume quality and keywords.</p>
+        </div>
+
+    </section>
+
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <p>Email: yourmail@gmail.com</p>
+        <p>LinkedIn: linkedin.com/in/yourprofile</p>
+    </section>
+
+    <footer>
+        © 2026 | Designed by Anjali 🚀
+    </footer>
+
+</body>
+
+</html>
