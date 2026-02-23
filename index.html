@@ -181,6 +181,32 @@
             background: black;
             text-align: center;
             margin-top: 40px;
+
+            .resume-btn {
+                display: inline-block;
+                margin-top: 15px;
+                padding: 12px 25px;
+                background-color: #007bff;
+                color: white;
+                text-decoration: none;
+                font-size: 16px;
+                font-weight: bold;
+                border-radius: 8px;
+                transition: 0.3s ease;
+            }
+
+            .resume-btn:hover {
+                background-color: #0056b3;
+                transform: scale(1.05);
+
+                .profile-img {
+                    width: 200px;
+                    height: 200px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    margin-bottom: 15px;
+                }
+            }
         }
     </style>
 </head>
@@ -199,11 +225,13 @@
 
     <div class="hero">
         <div>
-            <img src="your-image.jpg" alt="Anjali">
+            <img src="image/anjali.jpg" alt="Anjali" class="profile-img">
             <h1>Hello, I'm <span>Anjali</span></h1>
             <p>BCA Student at KL Mehta Dayanand Women College, Faridabad</p>
             <p>Strong Interest in Artificial Intelligence, Web Designing & Problem Solving</p>
-            <a href="resume.pdf" class="btn" download>Download Resume</a>
+            <a href="resume.pdf" class="resume-btn">
+                Open My Resume
+            </a>
         </div>
     </div>
 
@@ -251,8 +279,8 @@
 
     <section id="contact">
         <h2>Contact Me</h2>
-        <p>Email: yourmail@gmail.com</p>
-        <p>LinkedIn: linkedin.com/in/yourprofile</p>
+        <p>Email: anjalithakur113339@gmail.com</p>
+        <p>LinkedIn: www.linkedin.com/in/anjali-singh-69329b3aa</p>
     </section>
 
     <footer>
