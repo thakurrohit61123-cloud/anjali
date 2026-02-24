@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AI Resume Analyzer Pro+ | Anjali</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: white;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            background: black;
+            font-size: 22px;
+            letter-spacing: 2px;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .left,
+        .right {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px #00f2fe;
+        }
+
+        textarea {
+            width: 100%;
+            height: 180px;
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background: #00f2fe;
+            border: none;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: white;
+        }
+
+        .progress {
+            width: 100%;
+            height: 25px;
+            background: #333;
+            border-radius: 20px;
+            margin-top: 20px;
+        }
+
+        .bar {
+            height: 100%;
+            width: 0%;
+            background: #00f2fe;
+            border-radius: 20px;
+            transition: 1s;
+        }
+
+        h3 {
+            color: #00f2fe;
+        }
+
+        .result-box {
+            margin-top: 20px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        .suggestion {
+            background: rgba(0, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        AI Resume Analyzer Pro+ | AI Resume Coach by Anjali
+    </div>
+
+    <div class="container">
+
+        <div class="left">
+            <h3>Upload Resume (PDF)</h3>
+            <input type="file" id="pdfUpload" accept="application/pdf">
+            <button onclick="extractPDF()">Extract & Analyze</button>
+
+            <h3>OR Paste Resume Text</h3>
+            <textarea id="resumeText" placeholder="Paste resume content here..."></textarea>
+            <button onclick="analyzeText()">Analyze Text</button>
+        </div>
+
+        <div class="right">
+            <h3>ATS Score</h3>
+            <div class="progress">
+                <div class="bar" id="scoreBar"></div>
+            </div>
+
+            <div class="result-box" id="results"></div>
+        </div>
+
+    </div>
+
+    <script>
+
+        const keywords = {
+            "html": 10,
+            "css": 10,
+            "javascript": 15,
+            "java": 15,
+            "python": 15,
+            "ai": 20,
+            "machine learning": 20,
+            "data science": 20,
+            "problem solving": 10,
+            "communication": 5,
+            "leadership": 5,
+            "project": 10,
+            "internship": 15
+        };
+
+        function analyze(content) {
+
+            content = content.toLowerCase();
+            let score = 0;
+            let found = [];
+            let missing = [];
+
+            for (let key in keywords) {
+                if (content.includes(key)) {
+                    score += keywords[key];
+                    found.push(key);
+                } else {
+                    missing.push(key);
+                }
+            }
+
+            if (score > 100) score = 100;
+
+            document.getElementById("scoreBar").style.width = score + "%";
+
+            let sectionSuggestions = [];
+
+            if (!content.includes("education")) {
+                sectionSuggestions.push("Add an Education section with degree, college, and year.");
+            }
+
+            if (!content.includes("experience")) {
+                sectionSuggestions.push("Add Experience or Internship section with measurable achievements.");
+            }
+
+            if (!content.includes("skills")) {
+                sectionSuggestions.push("Add a clear Technical Skills section.");
+            }
+
+            if (!content.includes("project")) {
+                sectionSuggestions.push("Mention projects with technologies used and outcomes.");
+            }
+
+            if (!content.includes("github")) {
+                sectionSuggestions.push("Add GitHub or portfolio link to showcase your work.");
+            }
+
+            let improvementTips = [
+                "Use action verbs like Developed, Designed, Implemented.",
+                "Add measurable results (e.g., Improved performance by 30%).",
+                "Keep resume ATS-friendly (simple fonts, no heavy graphics).",
+                "Customize resume according to job description keywords."
+            ];
+
+            let feedback = "";
+
+            if (score >= 85) {
+                feedback = "Excellent Resume – Highly ATS Optimized.";
+            } else if (score >= 60) {
+                feedback = "Good Resume – Some improvements needed for top companies.";
+            } else {
+                feedback = "Needs Improvement – Add more technical depth & structure.";
+            }
+
+            document.getElementById("results").innerHTML = `
+        <h3>Score: ${score}/100</h3>
+        <p><b>AI Feedback:</b> ${feedback}</p>
+
+        <div class="suggestion">
+        <b>Missing Important Skills:</b><br>
+        ${missing.slice(0, 6).join(", ")}
+        </div>
+
+        <div class="suggestion">
+        <b>Structure Improvements:</b>
+        <ul>${sectionSuggestions.map(s => `<li>${s}</li>`).join("")}</ul>
+        </div>
+
+        <div class="suggestion">
+        <b>How to Make it 100% Strong:</b>
+        <ul>${improvementTips.map(t => `<li>${t}</li>`).join("")}</ul>
+        </div>
+    `;
+        }
+
+        function analyzeText() {
+            let text = document.getElementById("resumeText").value;
+            if (!text) {
+                alert("Please paste resume text.");
+                return;
+            }
+            analyze(text);
+        }
+
+        function extractPDF() {
+
+            const file = document.getElementById("pdfUpload").files[0];
+            if (!file) {
+                alert("Please upload a PDF file.");
+                return;
+            }
+
+            const reader = new FileReader();
+
+            reader.onload = function () {
+                const typedarray = new Uint8Array(this.result);
+
+                pdfjsLib.getDocument(typedarray).promise.then(pdf => {
+                    let textContent = "";
+
+                    let pages = [];
+
+                    for (let i = 1; i <= pdf.numPages; i++) {
+                        pages.push(
+                            pdf.getPage(i).then(page =>
+                                page.getTextContent().then(content => {
+                                    content.items.forEach(item => {
+                                        textContent += item.str + " ";
+                                    });
+                                })
+                            )
+                        );
+                    }
+
+                    Promise.all(pages).then(() => {
+                        analyze(textContent);
+                    });
+
+                });
+            };
+
+            reader.readAsArrayBuffer(file);
+        }
+
+    </script>
+
+</body>
+
+</html>
