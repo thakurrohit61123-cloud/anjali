@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AI Career Guidance Chatbot</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .chat-container {
+            width: 420px;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .chat-container h2 {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .chat-box {
+            height: 300px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            background: #fafafa;
+        }
+
+        .user {
+            text-align: right;
+            background: #667eea;
+            color: white;
+            padding: 8px;
+            border-radius: 10px;
+            margin: 5px;
+        }
+
+        .bot {
+            text-align: left;
+            background: #eee;
+            padding: 8px;
+            border-radius: 10px;
+            margin: 5px;
+        }
+
+        .input-area {
+            display: flex;
+            gap: 10px;
+        }
+
+        input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px 15px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #5a67d8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="chat-container">
+
+        <h2>AI Career Guidance Chatbot</h2>
+
+        <div class="chat-box" id="chatBox"></div>
+
+        <div class="input-area">
+            <input type="text" id="userInput" placeholder="Enter your skills (Python, Java, Design)">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+
+    </div>
+
+    <script>
+
+        function sendMessage() {
+
+            let input = document.getElementById("userInput").value.toLowerCase();
+
+            if (input.trim() == "") return;
+
+            let chatBox = document.getElementById("chatBox");
+
+            chatBox.innerHTML += `<div class="user">${input}</div>`;
+
+            let reply = "Try entering skills like Python, Java, AI, Design or Data.";
+
+            if (input.includes("python") || input.includes("data")) {
+                reply = "You can explore careers like Data Scientist, Data Analyst, or Python Developer.";
+            }
+
+            else if (input.includes("java")) {
+                reply = "You can become a Java Developer or Backend Engineer.";
+            }
+
+            else if (input.includes("design")) {
+                reply = "You can explore UI/UX Designer or Graphic Designer careers.";
+            }
+
+            else if (input.includes("ai") || input.includes("machine learning")) {
+                reply = "You can explore AI Engineer or Machine Learning Engineer roles.";
+            }
+
+            else if (input.includes("web") || input.includes("html") || input.includes("css")) {
+                reply = "You can become a Frontend Developer or Full Stack Web Developer.";
+            }
+
+            chatBox.innerHTML += `<div class="bot">${reply}</div>`;
+
+            document.getElementById("userInput").value = "";
+
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+        }
+
+        document.getElementById("userInput")
+            .addEventListener("keypress", function (event) {
+                if (event.key === "Enter") {
+                    sendMessage();
+                }
+            });
+
+    </script>
+
+</body>
+
+</html>
